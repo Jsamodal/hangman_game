@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <title>Hangman Game</title>
+</head>
+<body>
+    <div class= "container">
+       <h1 class="text-center">Hangman</h1>
+       <div class="float-right">Wrong Guesses <span id='mistakes'>0</span> of <span id='maxWrong'></span>  </div>
+        <div class="text-center">
+            <img src="/Users/jrsamodal/code_core/home_work/hangman_game/images/hangman/gallows.jpg">
+            <p>Guess the word:</p>
+            <p id="wordSpotLight">This is the word</p>
+            <div id="keyboard">
+
+            </div>
+            <button class="btn btn-info" onClick="reset()">Reset</button>
+        </div>   
+    </div>
+
+    <script src='./js/main.js'></script>
+</body>
+</html>
