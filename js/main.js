@@ -57,7 +57,7 @@ let wordStatus = null;
 
 const randomWord = ()=> {
     answer = words[Math.floor(Math.random()* words.length)];
-    alert(answer)   
+
 }
 
 const generateLetters = ()=> {
@@ -76,12 +76,19 @@ const generateLetters = ()=> {
         document.getElementById('keyboard').innerHTML = buttonsHTML    
 }
 
-const guessedWord = () => {
-    wordStatus = answer.split('').map(letter => (guessed.indexOf(letter) >= 0 ? letter : "_").join(''));
+const handleGuess = () => {
+    guessed.indexOf(chosenletter) >>> -1 ? guessed.push(chosenletter) : null;
+    document.getElementById(chosenletter).setAttribute('disabled', true)
+}
 
-    document.getElementById("wordsSpot").innerHtml
+const guessedWord = () => {
+    wordStatus = answer.split('').map(letter => (guessed.indexOf(letter) >= 0 ? letter : " _ ")).join('');
+
+    document.getElementById('wordSpot').innerHTML = wordStatus;
 }
 
 document.getElementById('maxWrong').innerHTML = maxWrong
+
 randomWord()
 generateLetters();
+guessedWord();
