@@ -85,35 +85,39 @@ function generateLetters() {
   document.getElementById('keyboard').innerHTML = lettersHTML;
 }
 
+//handles the guess of the user 
+
 function handleGuess(chosenLetter) {
   guessed.indexOf(chosenLetter) === -1 ? guessed.push(chosenLetter) : null;
   document.getElementById(chosenLetter).setAttribute('disabled', true);
 
   if (answer.indexOf(chosenLetter) >= 0) {
     guessedWord();
-    checkIfGameWon();
+    gameWon();
   } else if (answer.indexOf(chosenLetter) === -1) {
     mistakes++;
     updateMistakes();
-    checkIfGameLost();
-    updateHangmanPicture();
+    gameLost();
+    updateHangman();
   }
 }
 
-function updateHangmanPicture() {
-  document.getElementById('hangmanPic').src = './images/gallows' + mistakes + '.jpg';
+function updateHangman() {
+  document.getElementById('hangman').src = './images/gallows' + mistakes + '.jpg';
 }
 
-function checkIfGameWon() {
+function gameWon() {
   if (wordStatus === answer) {
-    document.getElementById('keyboard').innerHTML = 'You Won!!!';
+    alert('Congratulations! you win!')
+    reset();
   }
 }
 
-function checkIfGameLost() {
+function gameLost() {
   if (mistakes === maxWrong) {
-    document.getElementById('wordSpot').innerHTML = 'The answer was: ' + answer;
-    document.getElementById('keyboard').innerHTML = 'You Lost!!!';
+      alert(`The answer was: ${answer}, You Lost... ` )
+      reset();
+    
   }
 }
 
@@ -130,7 +134,7 @@ function updateMistakes() {
 function reset() {
   mistakes = 0;
   guessed = [];
-  document.getElementById('hangmanPic').src = './images/gallows0.jpg';
+  document.getElementById('hangman').src = './images/gallows0.jpg';
 
   randomWord();
   guessedWord();

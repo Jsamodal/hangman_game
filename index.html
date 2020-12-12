@@ -7,17 +7,25 @@
 
   <!-- Bootstrap 4 CDN -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-
+  <link
+  rel="stylesheet"
+  href="main.css"
+  type="text/css"
+  
+    />
   <title>Hangman</title>
 </head>
 <body>
 <div class="container">
+  
   <h1 class="text-center">Hangman</h1>
+  <br>
+  <p class="text-center" id="wordSpot"></p>
   <div class="float-right">Wrong Guesses: <span id='mistakes'>0</span> of <span id='maxWrong'></span></div>
   <div class="text-center">
-    <img id='hangmanPic' src="./images/gallows0.jpg" alt="">
+    <img id='hangman' src="./images/gallows0.jpg" alt="">
     <p>Guess the word:</p>
-    <p id="wordSpot">The word to be guessed goes here</p>
+    
     <div id="keyboard"></div>
     <button class="btn btn-info" onClick="reset()">Reset</button>
   </div> 
