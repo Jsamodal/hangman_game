@@ -1,27 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <title>Hangman Game</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <!-- Bootstrap 4 CDN -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+  <title>Hangman</title>
 </head>
 <body>
-    <div class= "container">
-       <h1 class="text-center">Hangman</h1>
-       <div class="float-right">Wrong Guesses <span id='mistakes'>0</span> of <span id='maxWrong'></span>  </div>
-        <div class="text-center">
-            <img id="hangman" src="/Users/jrsamodal/code_core/home_work/hangman_game/images/hangman/gallows.jpg">
-            <p>Guess the word:</p>
-            <p id="wordSpot">This is the word to be guessed</p>
-            <div id="keyboard">
+<div class="container">
+  <h1 class="text-center">Hangman</h1>
+  <div class="float-right">Wrong Guesses: <span id='mistakes'>0</span> of <span id='maxWrong'></span></div>
+  <div class="text-center">
+    <img id='hangmanPic' src="./images/gallows0.jpg" alt="">
+    <p>Guess the word:</p>
+    <p id="wordSpot">The word to be guessed goes here</p>
+    <div id="keyboard"></div>
+    <button class="btn btn-info" onClick="reset()">Reset</button>
+  </div> 
+</div>
 
-            </div>
-            <button class="btn btn-info" onClick="reset()">Reset</button>
-        </div>   
-    </div>
-
-    <script src='./js/main.js'></script>
+<script src='/Users/jrsamodal/code_core/home_work/hangman_game/js/main.js'></script>
 </body>
 </html>

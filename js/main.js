@@ -5,44 +5,55 @@ const words = [
     "balaklava",
     "donut",
     "glazed",
-    'sour cream',
-    "whip cream",
     "camera",
     "babes",
     "stand",
-    "stuff toy",
     "guitar",
-    "sound board",
-    "i hate studying",
-    "little duck",
-    "black duck",
-    "move on",
-    "the moon",
-    "chicken nugget",
+    "nugget",
     "christmas",
-    "lynn canyon",
-    "grizzly bear",
     "onomatopoeia",
     "happy birthday",
     "supercalifragilisticexpialidocious",
-    "iphone eleven",
+    "iphone",
     "chocolate",
-    "strawberry milkshake",
+    "milkshake",
     "eyebrows",
-    "hopeless romantic",
-    "oahu hawaii",
-    "hannah montana",
-    "correct answer",
+    "romantic",
+    "hawaii",
+    "answer",
     "kirkland",
     "facebook",
-    "instagram algorithm",
-    "kylie jenner",
-    "kobe bryant",
-    "mini guitar",
-    "happy feet",
-    "covid nineteen",
+    "algorithm",
+    "kylie",
+    "kobe",
+    "mini",
+    "happy",
+    "covid",
     "mukbang",
     "marketplace",
+    "bashful",
+    "instagram",
+    "lethargic",
+    "ragnarok",
+    "password",
+    "ghasted",
+    "software",
+    "javascript",
+    "agreeable",
+    "imaginative",
+    "ebeneezer",
+    "conscientiousness",
+    "neuroticism",
+    "paris",
+    "love",
+    "wheel",
+    "lettuce",
+    "penguin",
+    "experiences",
+
+
+
+
 
 
 
@@ -55,40 +66,80 @@ let mistakes = 0;
 let guessed = [];
 let wordStatus = null;
 
-const randomWord = ()=> {
-    answer = words[Math.floor(Math.random()* words.length)];
-
+function randomWord() {
+  answer = words[Math.floor(Math.random() * words.length)];
 }
 
-const generateLetters = ()=> {
-    let buttonsHTML = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map(letter =>
-       `
-        <button
-            class="btn btn-lg btn-primary m-2"
-            id= '`+ letter +`
-            onClick="handleGuess('` + letter + `')"
-        '>
-            ` + letter + `
+function generateLetters() {
+  let lettersHTML = 'abcdefghijklmnopqrstuvwxyz'.split('').map(letter =>
+    `
+      <button
+        class="btn btn-lg btn-primary m-2"
+        id='` + letter + `'
+        onClick="handleGuess('` + letter + `')"
+      >
+        ` + letter + `
+      </button>
+    `).join('');
 
-
-        </button>`
-        ).join('');
-        document.getElementById('keyboard').innerHTML = buttonsHTML    
+  document.getElementById('keyboard').innerHTML = lettersHTML;
 }
 
-const handleGuess = () => {
-    guessed.indexOf(chosenletter) >>> -1 ? guessed.push(chosenletter) : null;
-    document.getElementById(chosenletter).setAttribute('disabled', true)
+function handleGuess(chosenLetter) {
+  guessed.indexOf(chosenLetter) === -1 ? guessed.push(chosenLetter) : null;
+  document.getElementById(chosenLetter).setAttribute('disabled', true);
+
+  if (answer.indexOf(chosenLetter) >= 0) {
+    guessedWord();
+    checkIfGameWon();
+  } else if (answer.indexOf(chosenLetter) === -1) {
+    mistakes++;
+    updateMistakes();
+    checkIfGameLost();
+    updateHangmanPicture();
+  }
 }
 
-const guessedWord = () => {
-    wordStatus = answer.split('').map(letter => (guessed.indexOf(letter) >= 0 ? letter : " _ ")).join('');
-
-    document.getElementById('wordSpot').innerHTML = wordStatus;
+function updateHangmanPicture() {
+  document.getElementById('hangmanPic').src = './images/gallows' + mistakes + '.jpg';
 }
 
-document.getElementById('maxWrong').innerHTML = maxWrong
+function checkIfGameWon() {
+  if (wordStatus === answer) {
+    document.getElementById('keyboard').innerHTML = 'You Won!!!';
+  }
+}
 
-randomWord()
+function checkIfGameLost() {
+  if (mistakes === maxWrong) {
+    document.getElementById('wordSpot').innerHTML = 'The answer was: ' + answer;
+    document.getElementById('keyboard').innerHTML = 'You Lost!!!';
+  }
+}
+
+function guessedWord() {
+  wordStatus = answer.split('').map(letter => (guessed.indexOf(letter) >= 0 ? letter : " _ ")).join('');
+
+  document.getElementById('wordSpot').innerHTML = wordStatus;
+}
+
+function updateMistakes() {
+  document.getElementById('mistakes').innerHTML = mistakes;
+}
+
+function reset() {
+  mistakes = 0;
+  guessed = [];
+  document.getElementById('hangmanPic').src = './images/gallows0.jpg';
+
+  randomWord();
+  guessedWord();
+  updateMistakes();
+  generateLetters();
+}
+
+document.getElementById('maxWrong').innerHTML = maxWrong;
+
+randomWord();
 generateLetters();
 guessedWord();
